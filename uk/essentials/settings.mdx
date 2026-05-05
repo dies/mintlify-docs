@@ -1,0 +1,174 @@
+---
+title: Конфігурація
+description: Налаштуйте свій сайт за допомогою файлу `docs.json
+icon: спорядження
+---
+
+Кожен сайт Mintlify налаштовується через файл `docs.json` в корені вашого проекту. Зміни негайно вступають в силу в локальному перегляді.
+
+## Ідентичність
+
+Визначте назву, тему та візуальну ідентичність вашого сайту.
+
+```json docs.json
+{
+  "name": "Acme Docs",
+  "theme": "mint",
+  "favicon": "/favicon.svg",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  }
+}
+```
+
+<ResponseField name="ім'я" type="рядок" required>
+  Назва вашого проекту. Відображається в заголовку вкладки браузера та метаданих сайту.
+</ResponseField>
+
+<ResponseField name="тема" type="рядок">
+  Візуальна тема. Варіанти: `м'ята`, `клен`, `верба`, `секвойя`, `призма`.
+</ResponseField>
+
+<ResponseField name="favicon" type="рядок">
+  Шлях до вашої іконки. SVG рекомендується для чіткого рендерингу на всіх розмірах.
+</ResponseField>
+
+<ResponseField name="логотип" type="об'єкт">
+  <Expandable title="Логотип">
+    <ResponseField name="light" type="string">Логотип відображається у світловому режимі.</ResponseField>
+    <ResponseField name="dark" type="string">Логотип показано в темному режимі.</ResponseField>
+    <ResponseField name="href" type="string" default="/">URL, на який посилається логотип.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Кольори
+
+```json docs.json
+{
+  "colors": {
+    "primary": "#16A34A",
+    "light": "#07C983",
+    "dark": "#15803D"
+  }
+}
+```
+
+<ResponseField name="colors.primary" type="рядок" required>
+  Основний колір бренду. Використовується для виділення, активних станів і акцентів у світловому режимі.
+</ResponseField>
+
+<ResponseField name="colors.light" type="рядок">
+  Основний колір для темного режиму.
+</ResponseField>
+
+<ResponseField name="colors.dark" type="рядок">
+  Використовується для кнопок та важливих інтерактивних елементів.
+</ResponseField>
+
+<ResponseField name="colors.background" type="об'єкт">
+  Перевизначити колір фону сторінки за замовчуванням.
+  <Expandable title="Передумови">
+    <ResponseField name="light" type="string">Колір фону гексів у світловому режимі.</ResponseField>
+    <ResponseField name="dark" type="string">Колір фону гексів у темному режимі.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Навігаційна панель
+
+Налаштуйте посилання верхньої навігаційної панелі та основний заклик до дії.
+
+```json docs.json
+{
+  "navbar": {
+    "links": [
+      { "label": "Support", "href": "mailto:support@example.com" }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://dashboard.example.com"
+    }
+  }
+}
+```
+
+<ResponseField name="navbar.links" type="масив">
+  Текстові посилання відображаються у верхній навігаційній панелі.
+  <Expandable title="Посилання">
+    <ResponseField name="label" type="string">Відобразити текст для посилання.</ResponseField>
+    <ResponseField name="href" type="string">URL, на який вказує посилання.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="navbar.primary" type="об'єкт">
+  Помітний заклик до дії у верхньому правому куті.
+  <Expandable title="Початковий">
+    <ResponseField name="тип" type="&#x22;button&#x22; | &#x22;github&#x22;">
+      `button` рендерить кнопку заклику до дії. `github` видає значок підрахунку зірок.
+    </ResponseField>
+    <ResponseField name="label" type="string">Етикетка на ґудзику. Обов'язковий, якщо тип `button`.</ResponseField>
+    <ResponseField name="href" type="string">URL-адресу, на яку посилається кнопка або бейдж.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Навігація
+
+Організуйте свої сторінки за вкладками та групами. Докладнішу інформацію можна знайти в посібнику [Навігація] (/essentials/navigation).
+
+```json docs.json
+{
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Путівники",
+        "групи": [
+          {
+            "group": "Початок роботи",
+            "pages": [ "index", "quickstart"]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Blog",
+          "href": "https://example.com/blog",
+          "icon": "газета"
+        }
+      ]
+    }
+  }
+}
+```
+
+## Контекстна панель інструментів
+
+Контекстна панель інструментів плаває на кожній сторінці і надає читачам доступ до інструментів та інтеграцій ШІ в один клік. Повний список опцій див. у [Контекстній панелі інструментів](/agent-ready/contextual).
+
+```json docs.json
+{
+  "contextual": {
+    "options": [ "copy", "view", "claude", "mcp", "cursor", "vscode"]
+  }
+}
+```
+
+## Нижній колонтитул
+
+```json docs.json
+{
+  "footer": {
+    "socials": {
+      "x": "https://x.com/yourhandle",
+      "github": "https://github.com/yourorg",
+      "linkedin": "https://linkedin.com/company/yourco"
+    }
+  }
+}
+```
+
+<ResponseField name="footer.socials" type="об'єкт">
+  Соціальні посилання показані в нижньому колонтитулі. Підтримувані ключі: `x`, `github`, `linkedin`, `discord`, `lack`, `facebook`, `instagram`, `website`.
+</ResponseField>

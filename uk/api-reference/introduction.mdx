@@ -1,0 +1,33 @@
+---
+title: Вступ
+description: Приклад розділу для демонстрації кінцевих точок API
+---
+
+<Note>
+  Якщо ви не хочете створювати довідкову документацію до API, ви можете видалити
+  цей розділ, видаливши папку api-reference.
+</Note>
+
+## Ласкаво просимо.
+
+Існує два способи побудови документації до API: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) та [MDX компоненти](https://mintlify.com/docs/api-playground/mdx/configuration). Для стартового набору ми використовуємо наступну специфікацію OpenAPI.
+
+<Card title="Кінцеві точки зберігання рослин" icon="листок" href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json">
+
+
+
+
+  Переглянути файл специфікації OpenAPI
+</Card>
+
+## Аутентифікація
+
+Всі кінцеві точки API аутентифікуються за допомогою токенів Bearer, які беруться з файлу специфікації.
+
+```json
+"security": [
+  {
+    "bearerAuth": [
+  }
+]
+```

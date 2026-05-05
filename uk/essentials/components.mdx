@@ -1,0 +1,207 @@
+---
+title: Компоненти
+description: Виклики, картки, кроки, вкладки та багато іншого
+icon: шматочок пазла
+---
+
+Компоненти Mintlify дозволяють створювати багаті, інтерактивні сторінки документації за допомогою MDX. Ось деякі з найпоширеніших.
+
+Повний список можна знайти в [огляді компонентів] (https://mintlify.com/docs/components) в документації Mintlify.
+
+## Вигуки
+
+Використовуйте вигуки, щоб привернути увагу до важливої інформації.
+
+<Note>**Примітка** містить загальну інформацію, яка допоможе читачеві.</Note>
+
+<Tip>Підказка\*\* вказує на корисний спосіб скорочення або найкращу практику.</Tip>
+
+<Warning>Попередження\*\* вказує на те, що може спричинити проблеми.</Warning>
+
+<Info>Вигук **Інформація** надає додатковий контекст.</Info>
+
+```mdx
+<Note>**Примітка** містить загальну інформацію, яка допоможе читачеві.</Note>
+
+<Tip>Порада** вказує на корисний ярлик або найкращу практику.</Tip>
+
+<Warning>Попередження" вказує на те, що може спричинити проблеми.</Warning>
+
+<Info>Вигук **Інформація** надає додатковий контекст.</Info>
+```
+
+## Картки
+
+Картки посилають читачів на інші сторінки або ресурси.
+
+<Columns cols={2}>
+  <Card title="Посилання на API" icon="термінал" href="/api-reference/introduction">
+    Автоматично згенеровані документи з вашої специфікації OpenAPI.
+  </Card>
+  <Card title="Швидкий старт" icon="ракета" href="/quickstart">
+    Запустіть свої документи в три кроки.
+  </Card>
+</Columns>
+
+```mdx
+<Columns cols={2}>
+  <Card title="API Reference" icon="terminal" href="/api-reference/introduction">
+    Автоматично згенеровані документи з вашої специфікації OpenAPI. </Card> <Card title="API Reference" icon="terminal" href="/api-reference/introduction">
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Запустіть ваші документи в три кроки. </Card> <Card title="Quickstart" icon="rocket" href="/quickstart">
+  </Card>
+</Columns>
+```
+
+Використовуйте `\<Columns cols={N}>` для керування шириною сітки. Картки без `href` відображаються як інформаційні панелі.
+
+## Сходинки
+
+Кроки чітко представляють пронумеровані процедури.
+
+<Steps>
+  <Step title="Встановіть пакунок">
+    ```bash
+    npm install my-package
+    ```
+  </Step>
+  <Step title="Ініціалізувати">
+    Запустіть команду init у корені вашого проекту.
+    ```bash
+    npx my-package init
+    ```
+  </Step>
+  <Step title="Ти готова.">
+    Почніть використовувати пакет у своєму коді.
+  </Step>
+</Steps>
+
+````mdx
+<Steps>
+  <Step title="Install the package">
+    ```bash
+    npm install my-package
+    ```
+  </Step>
+  <Step title="Initialize">
+    Запустіть команду init у корені вашого проекту.
+  </Step>
+  <Step title="You're ready">
+    Почніть використовувати пакунок у вашому коді.
+  </Step>
+</Steps>
+````
+
+## Вкладки
+
+Вкладки дозволяють читачам перемикатися між альтернативним контентом - різними мовами, середовищами або платформами.
+
+<Tabs>
+  <Tab title="проміле">
+    ```bash
+    npm install my-package
+    ```
+  </Tab>
+  <Tab title="пряжа">
+    ```bash
+    пряжа додати мій пакет
+    ```
+  </Tab>
+  <Tab title="проміле">
+    ```bash
+    pnpm add my-package
+    ```
+  </Tab>
+</Tabs>
+
+````mdx
+<Tabs>
+  <Tab title="npm">
+    ```bash
+    npm install my-package
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn add my-package
+    ```
+  </Tab>
+  <Tab title="pnpm">
+    ```bash
+    pnpm add my-package
+    ```
+  </Tab>
+</Tabs>
+````
+
+## Акордеони
+
+Акордеони згортають вміст за перемикачем - корисно для поширених запитань або необов'язкових деталей.
+
+<AccordionGroup>
+  <Accordion title="Що робить цей продукт?">
+    Коротка відповідь на перше питання. Будь лаконічним.
+  </Accordion>
+  <Accordion title="Як розраховується ціна?">
+    Ще одна відповідь. Використовуйте стільки місця, скільки вам потрібно.
+  </Accordion>
+</AccordionGroup>
+
+```mdx
+<AccordionGroup>
+  <Accordion title="What does this product do?">
+    Коротка відповідь на перше питання.
+  </Accordion>
+  <Accordion title="How is pricing calculated?">
+    Ще одна відповідь тут.
+  </Accordion>
+</AccordionGroup>
+```
+
+## Рамки
+
+Оберніть зображення або інший вміст у "рамку", щоб додати стилізовану рамку та заокруглені кути.
+
+<Frame>
+  <img src="https://mintlify-assets.b-cdn.net/bigbend.jpg" alt="Пейзаж Біг Бенд" />
+</Frame>
+
+```mdx
+<Frame>
+  <img src="/images/screenshot.png" alt="App screenshot" />
+</Frame>
+```
+
+## Групи кодів
+
+`CodeGroup` відображає кілька фрагментів коду у вигляді вкладок - ідеально підходить для показу одного і того ж прикладу кількома мовами.
+
+<CodeGroup>
+  ```typescript TypeScript
+  const response = await fetch('https://api.example.com/users');
+  const users = await response.json();
+  ```
+
+  ```python Python
+  import requests
+  response = requests.get('https://api.example.com/users')
+  users = response.json()
+  ```
+
+  ```bash curl
+  curl https://api.example.com/users
+  ```
+</CodeGroup>
+
+````mdx
+<CodeGroup>
+  ```typescript TypeScript
+  const response = await fetch('https://api.example.com/users');
+  ```
+
+  ```python Python
+  response = requests.get('https://api.example.com/users')
+  ```
+</CodeGroup>
+````

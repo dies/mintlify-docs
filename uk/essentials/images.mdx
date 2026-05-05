@@ -1,0 +1,47 @@
+---
+title: Зображення та вставки
+description: Додавання зображень, відео та інших HTML-елементів
+icon: зображення
+---
+
+<img style={{ borderRadius: '0.5rem' }} src="https://mintlify-assets.b-cdn.net/bigbend.jpg" />
+
+## Зображення
+
+### Використовуючи уцінку
+
+Синтаксис [markdown синтаксис](https://www.markdownguide.org/basic-syntax/#images) дозволяє додавати зображення за допомогою наступного коду
+
+```md
+![title](/path/image.jpg)
+```
+
+Зверніть увагу, що розмір файлу зображення не повинен перевищувати 5 МБ. В іншому випадку ми рекомендуємо хостинг на таких сервісах, як [Cloudinary](https://cloudinary.com/) або [S3](https://aws.amazon.com/s3/). Потім ви можете використовувати цю URL-адресу для вбудовування.
+
+### Використання вбудовувань
+
+Щоб отримати більше можливостей для налаштування зображень, ви також можете використовувати [embeds](/writing-content/embed) для додавання зображень
+
+```html
+<img height="200" src="/path/image.jpg" />
+```
+
+## Вбудовування та елементи HTML
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4KzFe50RQkQ" title="Відеоплеєр YouTube" frameBorder="0" allow="акселерометр; автовідтворення; запис у буфер обміну; зашифровані медіа; гіроскоп; картинка в картинці" allowFullScreen style={{ width: '100%', borderRadius: '0.5rem' }} />
+
+<br />
+
+<Tip>
+
+Mintlify підтримує [HTML-теги в Markdown](https://www.markdownguide.org/basic-syntax/#html). Це корисно, якщо ви віддаєте перевагу тегам HTML, а не синтаксису Markdown, і дозволяє створювати документацію з необмеженою гнучкістю.
+
+</Tip>
+
+### iFrames
+
+Завантажує ще одну HTML-сторінку в документі. Найчастіше використовується для вбудовування відео.
+
+```html
+<iframe src="https://www.youtube.com/embed/4KzFe50RQkQ"> </iframe>
+```
