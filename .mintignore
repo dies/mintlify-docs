@@ -5,3 +5,6 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Mintlify does not currently support `et` as a locale code.
+et/
