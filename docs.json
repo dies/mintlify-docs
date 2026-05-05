@@ -288,6 +288,72 @@
             ]
           }
         ]
+      },
+      {
+        "language": "uk",
+        "tabs": [
+          {
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "uk/index",
+                  "uk/quickstart",
+                  "uk/development"
+                ]
+              },
+              {
+                "group": "Customization",
+                "pages": [
+                  "uk/essentials/settings",
+                  "uk/essentials/navigation"
+                ]
+              },
+              {
+                "group": "Writing content",
+                "pages": [
+                  "uk/essentials/markdown",
+                  "uk/essentials/code",
+                  "uk/essentials/images",
+                  "uk/essentials/components",
+                  "uk/essentials/reusable-snippets"
+                ]
+              },
+              {
+                "group": "Agent ready",
+                "pages": [
+                  "uk/agent-ready/prompt",
+                  "uk/agent-ready/visibility",
+                  "uk/agent-ready/contextual",
+                  "uk/ai-tools/cursor",
+                  "uk/ai-tools/claude-code",
+                  "uk/ai-tools/windsurf"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "API reference",
+            "groups": [
+              {
+                "group": "API documentation",
+                "pages": [
+                  "uk/api-reference/introduction"
+                ]
+              },
+              {
+                "group": "Endpoint examples",
+                "pages": [
+                  "uk/api-reference/endpoint/get",
+                  "uk/api-reference/endpoint/create",
+                  "uk/api-reference/endpoint/delete",
+                  "uk/api-reference/endpoint/webhook"
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   },
