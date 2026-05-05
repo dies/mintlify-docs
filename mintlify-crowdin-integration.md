@@ -6,7 +6,7 @@ The setup has three moving parts:
 
 1. `crowdin.yml` tells Crowdin which Mintlify source files to upload and where translated files should be downloaded.
 2. `docs.json` tells Mintlify which languages exist and which translated pages belong to each language.
-3. A GitHub Actions workflow keeps GitHub and Crowdin synchronized.
+3. A [GitHub Actions](https://github.com/crowdin/github-action) workflow keeps GitHub and Crowdin synchronized.
 
 After the integration is connected, you can decide how translation work is done in Crowdin: fully AI-generated translations, human translation/review, or a mixed workflow where only part of the content is routed through AI before review.
 
@@ -32,13 +32,7 @@ Crowdin should download translations into language folders that mirror the sourc
 .
 |-- index.mdx                         # English source
 |-- quickstart.mdx                    # English source
-|-- de/
-|   |-- index.mdx
-|   `-- quickstart.mdx
-|-- fr/
-|   |-- index.mdx
-|   `-- quickstart.mdx
-`-- uk/
+`-- de/
     |-- index.mdx
     `-- quickstart.mdx
 ```
@@ -100,7 +94,7 @@ files:
 What this does:
 
 - `source: /**/*.mdx` uploads MDX files from the repository.
-- `translation: /%two_letters_code%/**/%original_file_name%` downloads translations into language folders such as `fr/index.mdx` and `uk/quickstart.mdx`.
+- `translation: /%two_letters_code%/**/%original_file_name%` downloads translations into language folders such as `de/index.mdx` and `de/quickstart.mdx`.
 - `preserve_hierarchy: true` keeps the folder structure from the source docs.
 - `ignore` prevents translated folders from being uploaded back to Crowdin as source files.
 
@@ -134,13 +128,34 @@ Practical rules for translators and reviewers:
 - Do not translate file paths, imports, component names, props, or code blocks unless the text is clearly user-facing.
 - Keep Mintlify component syntax valid. Examples: `<Card>`, `<Accordion>`, `<Tabs>`, `<CodeGroup>`.
 
-## 4. Update `docs.json`
+## 4. Configure the MDX parser in Crowdin
+
+If a client reports import issues, or if imported MDX files are segmented in a way the team does not expect, check the parser settings in Crowdin before translating a large batch.
+
+In Crowdin, open **Settings** > **Parser Configuration** > **MDX (v2)**. Use this area to control how Crowdin treats MDX content, tags, and inline syntax. This is especially important for Mintlify pages because they often contain JSX-like components, props, code blocks, and frontmatter.
+
+Check parser settings when:
+
+- MDX tags are exposed to translators as editable text.
+- Component props are segmented incorrectly.
+- Frontmatter is not handled as expected.
+- Code examples or imports appear in translation strings.
+
+## 5. Import existing translations carefully
+
+Some teams already have translated MDX files before they connect Crowdin. You can upload those translations, but alignment can be difficult if the files were translated outside professional translation tools.
+
+The main risk is that the source and translated files no longer have the same segment structure. This can happen when translators rewrote sections, moved paragraphs, merged sentences, split sentences, or changed MDX structure.
+
+If existing translations do not align cleanly, use Crowdin's [Translation Alignment](https://store.crowdin.com/translation-alignment) app. It uses AI to match source and target text when uploaded translations are out of order or when segment counts differ. It supports Markdown-style content, including `.md` files, and can help when importing existing MDX translations.
+
+## 6. Update `docs.json`
 
 Mintlify does not enable languages only because translated folders exist. You must declare languages in `docs.json`.
 
 Use `navigation.languages` and include the full navigation for each language. The source language should also be present as a language entry.
 
-Example with English source plus French, German, and Ukrainian:
+Example with English source plus German:
 
 ```json
 {
@@ -175,30 +190,6 @@ Example with English source plus French, German, and Ukrainian:
         ]
       },
       {
-        "language": "fr",
-        "tabs": [
-          {
-            "tab": "Guides",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "fr/index",
-                  "fr/quickstart"
-                ]
-              },
-              {
-                "group": "Writing content",
-                "pages": [
-                  "fr/essentials/markdown",
-                  "fr/essentials/settings"
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
         "language": "de",
         "tabs": [
           {
@@ -221,30 +212,6 @@ Example with English source plus French, German, and Ukrainian:
             ]
           }
         ]
-      },
-      {
-        "language": "uk",
-        "tabs": [
-          {
-            "tab": "Guides",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "uk/index",
-                  "uk/quickstart"
-                ]
-              },
-              {
-                "group": "Writing content",
-                "pages": [
-                  "uk/essentials/markdown",
-                  "uk/essentials/settings"
-                ]
-              }
-            ]
-          }
-        ]
       }
     ]
   }
@@ -255,11 +222,11 @@ Important details:
 
 - Keep English/source inside `navigation.languages`. This lets Mintlify treat it as the source language in the language switcher and admin views.
 - Use root paths for English source files: `index`, `quickstart`, `essentials/markdown`.
-- Use language-prefixed paths for translated files: `fr/index`, `de/index`, `uk/index`.
+- Use language-prefixed paths for translated files: `de/index`, `de/quickstart`, `de/essentials/markdown`.
 - Do not use the same page path in multiple language entries.
 - Add a language to `docs.json` only when the translated files exist or when you are ready for Mintlify to expect those paths.
 
-## 5. Add GitHub secrets
+## 7. Add GitHub secrets
 
 In GitHub, open the repository settings and add these secrets:
 
@@ -272,7 +239,7 @@ Use a Crowdin token with access to upload source files and download translations
 
 The workflow can use GitHub's built-in `GITHUB_TOKEN` for creating branches and pull requests. If your repository has stricter permissions, use a GitHub App token or a fine-grained token with contents and pull request permissions.
 
-## 6. Add the GitHub Actions workflow
+## 8. Add the GitHub Actions workflow
 
 Create `.github/workflows/crowdin-sync.yml`.
 
@@ -326,12 +293,26 @@ This is the usual flow:
 1. A writer changes English MDX files on `main`.
 2. GitHub Actions uploads those source files to Crowdin.
 3. Translators, reviewers, or AI workflows complete translation work in Crowdin.
-4. The workflow downloads translations into folders such as `fr/`, `de/`, and `uk/`.
+4. The workflow downloads translations into folders such as `de/`.
 5. The action opens or updates a pull request with the translated files.
 6. You review and merge the translation pull request.
 7. Mintlify deploys the updated localized docs.
 
-## 7. Optional: download only approved translations
+## 9. Translate content before it reaches `main`
+
+Some teams need translations ready before new documentation is merged to `main`. For example, a feature branch might contain new English docs, and the team may want German translations prepared before the feature launch PR is merged.
+
+The Crowdin GitHub Action supports branch-based workflows. Use the [Crowdin GitHub Action documentation](https://github.com/crowdin/github-action) for the exact setup, especially the options for uploading sources to a Crowdin branch and checking out or pushing translations from a branch. In practice, this usually means:
+
+1. Run the Crowdin upload workflow on pull requests or feature branches.
+2. Pass the current Git branch name to Crowdin, so branch content is isolated from `main` content.
+3. Translate or pre-translate that branch content in Crowdin.
+4. Download translations back to the same GitHub branch or to a translation PR targeting that branch.
+5. Merge the feature only after the source and translated docs are ready.
+
+This avoids waiting for localization after `main` is already updated.
+
+## 10. Optional: download only approved translations
 
 If translations must be reviewed before publishing, add export options:
 
@@ -348,7 +329,7 @@ with:
 
 Use this when you do not want unapproved or untranslated strings to reach the docs repository.
 
-## 8. Optional: separate upload and download workflows
+## 11. Optional: separate upload and download workflows
 
 Some teams prefer two workflows:
 
@@ -421,7 +402,7 @@ jobs:
 
 This setup gives localization managers more control over when translated content is proposed for publishing.
 
-## 9. Validate before merging translation PRs
+## 12. Validate before merging translation PRs
 
 Before merging a translation PR, check these items:
 
@@ -441,7 +422,7 @@ mint broken-links
 mint dev
 ```
 
-## 10. Common issues
+## 13. Common issues
 
 ### Translated files are uploaded back to Crowdin as source
 
@@ -449,9 +430,7 @@ Add language folders to the `ignore` list in `crowdin.yml`:
 
 ```yaml
 ignore:
-  - /fr/**
   - /de/**
-  - /uk/**
 ```
 
 ### A language does not appear in Mintlify
@@ -480,13 +459,13 @@ Check for these causes:
 The translated file is missing, or the path in `docs.json` does not match the file path. For example, this entry:
 
 ```json
-"pages": ["uk/quickstart"]
+"pages": ["de/quickstart"]
 ```
 
 requires this file:
 
 ```text
-uk/quickstart.mdx
+de/quickstart.mdx
 ```
 
 ## Final checklist
