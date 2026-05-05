@@ -1,0 +1,91 @@
+---
+title: Menu de contexto
+description: Dê aos leitores acesso com um clique a ferramentas e integrações de IA
+icon: bolt
+---
+
+A barra de ferramentas contextual é uma barra de ações flutuante que aparece em todas as páginas da sua documentação. Ela permite que os leitores copiem instantaneamente o conteúdo da página, abram-no em um assistente de IA ou adicionem sua documentação como um servidor MCP — sem sair da página.
+
+Configure no `docs.json`, em `contextual.options`:
+
+```json docs.json
+{
+  "contextual": {
+    "options": ["copy", "view", "claude", "chatgpt", "mcp", "cursor", "vscode"]
+  }
+}
+```
+
+## Opções disponíveis
+
+### Ações de conteúdo
+
+| Opção          | Descrição                                                 |
+| -------------- | --------------------------------------------------------- |
+| `copiar`       | Copia a página como Markdown para a área de transferência |
+| `visualização` | Abre a versão Markdown bruta da página (URL `.md`)        |
+
+### Assistentes de IA
+
+| Opção        | Descrição                         |
+| ------------ | --------------------------------- |
+| `claude`     | Abre a página no Claude           |
+| `chatgpt`    | Abre a página no ChatGPT          |
+| `perplexity` | Abre a página no Perplexity       |
+| `grok`       | Abre a página no Grok             |
+| `aistudio`   | Abre a página no Google AI Studio |
+
+### Integrações com editores
+
+| Opção      | Descrição                                |
+| ---------- | ---------------------------------------- |
+| `cursor`   | Adiciona a página ao contexto do Cursor  |
+| `vscode`   | Adiciona a página ao VS Code Copilot     |
+| `windsurf` | Adiciona a página ao Cascade do Windsurf |
+| `devin`    | Abre a página no Devin                   |
+
+### MCP
+
+| Opção     | Descrição                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| `mcp`     | Mostra instruções para usar sua documentação como servidor MCP                                          |
+| `add-mcp` | Fornece um prompt de um clique para adicionar o servidor MCP da sua documentação a uma ferramenta de IA |
+
+<Tip>
+  As opções `mcp` e `add-mcp` são especialmente poderosas — elas permitem que os desenvolvedores conectem todo o seu site de documentação a qualquer assistente de IA compatível com MCP, para que ele possa responder diretamente a perguntas sobre o seu produto.
+</Tip>
+
+## Opções personalizadas
+
+Você pode adicionar entradas personalizadas à barra de ferramentas com um título, uma descrição, um ícone e um link. O `href` oferece suporte a marcadores de posição dinâmicos:
+
+| Marcador de posição | Resolve para                              |
+| ------------------- | ----------------------------------------- |
+| `$page`             | O URL completo da página atual            |
+| `$path`             | O caminho da página atual                 |
+| `$mcp`              | O URL do servidor MCP da sua documentação |
+
+```json docs.json
+{
+  "contextual": {
+    "options": [
+      "copy",
+      "claude",
+      {
+        "title": "Abrir issue",
+        "description": "Relatar um problema com esta página",
+        "icon": "github",
+        "href": "https://github.com/your-org/docs/issues/new?title=Issue+on+$path"
+      }
+    ]
+  }
+}
+```
+
+<Note>
+  A barra de ferramentas contextual só fica visível em implantações de pré-visualização e produção, não na pré-visualização local do `mint dev`.
+</Note>
+
+## Em combinação com o Visibility
+
+As opções `copy` e `view` da barra de ferramentas expõem diretamente o conteúdo Markdown da sua página. Se você usar o componente [`Visibility`](/agent-ready/visibility), os blocos `for="agents"` serão incluídos nesse Markdown — fornecendo aos assistentes de IA contexto estruturado que os leitores humanos não veem.
