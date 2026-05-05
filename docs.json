@@ -21,138 +21,77 @@
           "href": "https://mintlify.com/blog",
           "icon": "newspaper"
         }
+      ],
+      "languages": [
+        {
+          "language": "en",
+          "default": true,
+          "href": "/"
+        },
+        {
+          "language": "pt",
+          "href": "/pt"
+        }
       ]
     },
-    "languages": [
+    "tabs": [
       {
-        "language": "en",
-        "default": true,
-        "tabs": [
+        "tab": "Guides",
+        "groups": [
           {
-            "tab": "Guides",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "index",
-                  "quickstart",
-                  "development"
-                ]
-              },
-              {
-                "group": "Customization",
-                "pages": [
-                  "essentials/settings",
-                  "essentials/navigation"
-                ]
-              },
-              {
-                "group": "Writing content",
-                "pages": [
-                  "essentials/markdown",
-                  "essentials/code",
-                  "essentials/images",
-                  "essentials/components",
-                  "essentials/reusable-snippets"
-                ]
-              },
-              {
-                "group": "Agent ready",
-                "pages": [
-                  "agent-ready/prompt",
-                  "agent-ready/visibility",
-                  "agent-ready/contextual",
-                  "ai-tools/cursor",
-                  "ai-tools/claude-code",
-                  "ai-tools/windsurf"
-                ]
-              }
+            "group": "Getting started",
+            "pages": [
+              "index",
+              "quickstart",
+              "development"
             ]
           },
           {
-            "tab": "API reference",
-            "groups": [
-              {
-                "group": "API documentation",
-                "pages": [
-                  "api-reference/introduction"
-                ]
-              },
-              {
-                "group": "Endpoint examples",
-                "pages": [
-                  "api-reference/endpoint/get",
-                  "api-reference/endpoint/create",
-                  "api-reference/endpoint/delete",
-                  "api-reference/endpoint/webhook"
-                ]
-              }
+            "group": "Customization",
+            "pages": [
+              "essentials/settings",
+              "essentials/navigation"
+            ]
+          },
+          {
+            "group": "Writing content",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/components",
+              "essentials/reusable-snippets"
+            ]
+          },
+          {
+            "group": "Agent ready",
+            "pages": [
+              "agent-ready/prompt",
+              "agent-ready/visibility",
+              "agent-ready/contextual",
+              "ai-tools/cursor",
+              "ai-tools/claude-code",
+              "ai-tools/windsurf"
             ]
           }
         ]
       },
       {
-        "language": "pt",
-        "tabs": [
+        "tab": "API reference",
+        "groups": [
           {
-            "tab": "Guides",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "pt/index",
-                  "pt/quickstart",
-                  "pt/development"
-                ]
-              },
-              {
-                "group": "Customization",
-                "pages": [
-                  "pt/essentials/settings",
-                  "pt/essentials/navigation"
-                ]
-              },
-              {
-                "group": "Writing content",
-                "pages": [
-                  "pt/essentials/markdown",
-                  "pt/essentials/code",
-                  "pt/essentials/images",
-                  "pt/essentials/components",
-                  "pt/essentials/reusable-snippets"
-                ]
-              },
-              {
-                "group": "Agent ready",
-                "pages": [
-                  "pt/agent-ready/prompt",
-                  "pt/agent-ready/visibility",
-                  "pt/agent-ready/contextual",
-                  "pt/ai-tools/cursor",
-                  "pt/ai-tools/claude-code",
-                  "pt/ai-tools/windsurf"
-                ]
-              }
+            "group": "API documentation",
+            "pages": [
+              "api-reference/introduction"
             ]
           },
           {
-            "tab": "API reference",
-            "groups": [
-              {
-                "group": "API documentation",
-                "pages": [
-                  "pt/api-reference/introduction"
-                ]
-              },
-              {
-                "group": "Endpoint examples",
-                "pages": [
-                  "pt/api-reference/endpoint/get",
-                  "pt/api-reference/endpoint/create",
-                  "pt/api-reference/endpoint/delete",
-                  "pt/api-reference/endpoint/webhook"
-                ]
-              }
+            "group": "Endpoint examples",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/create",
+              "api-reference/endpoint/delete",
+              "api-reference/endpoint/webhook"
             ]
           }
         ]
@@ -178,15 +117,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
