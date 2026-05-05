@@ -6,7 +6,5 @@
 drafts/
 *.draft.mdx
 
-# Ignore translation folders that are not enabled in docs.json.
-de/
+# Mintlify does not currently support `et` as a locale code.
 et/
-fr/
